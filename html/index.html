@@ -6,13 +6,58 @@
 		<title>Intro to Web Animations API</title>
 		<link rel="stylesheet" type="text/css" href="./css/normalize.css">
 		<link rel="stylesheet" type="text/css" href="./css/main.css">
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/default.min.css">
+		<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/highlight.min.js"></script>
+		<script src="js/web-animations-next.min.js"></script>
+		<script>hljs.initHighlightingOnLoad();</script>
 	</head>
 	<body class="body">
 		<section class="slide">
-			Here we go.
+			<h1>Intro to Web Animations API</h1>
+			<p>James Y. Rauhut</p>
 		</section>
-		<section class="slide">
-			Right.
+		<section class="slide slide--css">
+			<h2>
+				Benefits:
+				<strong>Looks Similar to CSS</strong>
+			</h2>
+			<div class="slide--css__half">
+				<img class="slide--css__half__shaq slide--css__half__shaq--css" src="images/shaq.png">
+				<pre><code class="snippet css">
+/* Spinning with CSS */
+.shaq {animation: spin 5s linear infinite;}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+				</code></pre>
+			</div>
+			<div class="slide--css__half">
+				<img id="shaq" class="slide--css__half__shaq" src="images/shaq.png">
+				<pre><code class="snippet js">
+// Spinning with Web Animations API
+var shaq = document.getElementById('shaq');
+
+var timings = {
+  duration: 5000,
+  iterations: Infinity
+};
+
+var keyframes = [
+  { transform: 'rotate(0)' },
+  { transform: 'rotate(360deg)' }
+];
+
+var shaqEffect = new KeyframeEffect(shaq, keyframes, timings);
+document.timeline.play(shaqEffect);
+				</code></pre>
+			</div>
 		</section>
 		<section class="slide">
 			Now.

@@ -45,13 +45,21 @@ gulp.task('scss-lint', function() {
     .pipe(scsslint());
 });
 
-gulp.task('js', function() {
+gulp.task('js', ['js-components'], function() {
     return gulp.src([
                         'js/*.js'
                     ])
         .pipe(gulp.dest('static/js'))
         .pipe(rename({suffix: '.min'}))
         .pipe(uglify())
+        .pipe(gulp.dest('production/js'))
+});
+
+gulp.task('js-components', function() {
+    return gulp.src([
+                        'node_modules/web-animations-js/web-animations-next.min.js'
+                    ])
+        .pipe(gulp.dest('static/js'))
         .pipe(gulp.dest('production/js'))
 });
 
@@ -65,7 +73,7 @@ gulp.task('html', function() {
     return gulp.src(['html/*.html'])
         .pipe(gulp.dest('static'))
         .pipe(replace('.css', '.min.css'))
-        .pipe(replace('.js', '.min.js'))
+        .pipe(replace('myAnimations.js', 'myAnimations.min.js'))
         .pipe(minifyHTML(opts))
         .pipe(gulp.dest('production'))
 });

@@ -1,9 +1,9 @@
 {
   "name": "web-animations-intro",
-  "version": "1.0",
+  "version": "1.0.0",
   "description": "Updating seejamescode.com with everything I have learnt in the past year.",
   "author": "James Y. Rauhut <jamesrauhut@gmail.com>",
-  "license": "Private",
+  "license": "",
   "repository": {
     "type": "git",
     "url": "https://github.com/yepnamesjames/web-animations-intro/"
@@ -27,6 +27,7 @@
     "scsslint": "*"
   },
   "dependencies": {
-    "normalize.css": "*"
+    "normalize.css": "*",
+    "web-animations-js": "https://github.com/web-animations/web-animations-js.git"
   }
 }
