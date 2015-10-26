@@ -1,0 +1,28 @@
+$black: #000;
+$blue: #00a7cd;
+$white: #fff;
+
+// Font Sizing
+$scale: 1;
+$h1:  #{(4.236em * $scale)};
+$h2: #{(2.618em * $scale)};
+$h3: #{(1.618em * $scale)};
+$p: #{(1em * $scale)};
+$caption: #{(.618em * $scale)};
+
+.body {
+  background-color: $black;
+  margin: 0;
+  padding: 0;
+}
+
+.slide {
+  align-items: center;
+  background-color: $blue;
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  justify-content: center;
+  overflow: hidden;
+  text-align: center;
+}

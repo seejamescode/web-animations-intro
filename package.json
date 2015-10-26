@@ -1,0 +1,32 @@
+{
+  "name": "web-animations-intro",
+  "version": "1.0",
+  "description": "Updating seejamescode.com with everything I have learnt in the past year.",
+  "author": "James Y. Rauhut <jamesrauhut@gmail.com>",
+  "license": "Private",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yepnamesjames/web-animations-intro/"
+  },
+  "bugs": {
+    "url": "https://github.com/yepnamesjames/web-animations-intro/issues"
+  },
+  "devDependencies": {
+    "browser-sync": "*",
+    "del": "*",
+    "gulp": "*",
+    "gulp-add-src": "^0.2.0",
+    "gulp-autoprefixer": "^3.0.1",
+    "gulp-minify-css": "*",
+    "gulp-minify-html": "*",
+    "gulp-rename": "*",
+    "gulp-replace": "*",
+    "gulp-sass": "*",
+    "gulp-scss-lint": "^0.3.0",
+    "gulp-uglify": "^1.4.1",
+    "scsslint": "*"
+  },
+  "dependencies": {
+    "normalize.css": "*"
+  }
+}
