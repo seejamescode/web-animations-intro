@@ -10,6 +10,10 @@ $h3: #{(1.618em * $scale)};
 $p: #{(1em * $scale)};
 $caption: #{(.618em * $scale)};
 
+pre {
+  width: 100%;
+}
+
 .body {
   background-color: $black;
   margin: 0;
@@ -35,27 +39,41 @@ $caption: #{(.618em * $scale)};
 .slide--css {
   background-color: $white;
 
-  .slide--css__half {
+  .slide--css__content {
     align-items: center;
     display: flex;
     flex-direction: column;
-    height: 50%;
     justify-content: center;
     overflow: hidden;
     text-align: center;
 
+    .slide--css__content__half {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      width: 80%;
+      justify-content: center;
+      overflow: hidden;
+      padding: 1em;
+      text-align: center;
+
+      .slide--css__content__half__shaq {
+        height: 30%;
+        margin-right: 1em;
+        width: 30%;
+      }
+
+      .slide--css__content__half__shaq--css {
+        animation: spin 5s linear infinite;
+      }
+    }
+
     @media (min-width: 660px) {
       flex-direction: row;
-    }
 
-    .slide--css__half__shaq {
-      height: 30%;
-      margin-right: 1em;
-      width: 30%;
-    }
-
-    .slide--css__half__shaq--css {
-      animation: spin 5s linear infinite;
+      .slide--css__content__half {
+        width: 50%;
+      }
     }
   }
 }

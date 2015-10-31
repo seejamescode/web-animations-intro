@@ -21,9 +21,10 @@
 				Benefits:
 				<strong>Looks Similar to CSS</strong>
 			</h2>
-			<div class="slide--css__half">
-				<img class="slide--css__half__shaq slide--css__half__shaq--css" src="images/shaq.png">
-				<pre><code class="snippet css">
+			<div class="slide--css__content">
+				<div class="slide--css__content__half">
+					<img class="slide--css__content__half__shaq slide--css__content__half__shaq--css" src="images/shaq.png">
+					<pre><code class="snippet css">
 /* Spinning with CSS */
 .shaq {animation: spin 5s linear infinite;}
 
@@ -36,11 +37,11 @@
     transform: rotate(360deg);
   }
 }
-				</code></pre>
-			</div>
-			<div class="slide--css__half">
-				<img id="shaq" class="slide--css__half__shaq" src="images/shaq.png">
-				<pre><code class="snippet js">
+					</code></pre>
+				</div>
+				<div class="slide--css__content__half">
+					<img id="shaq" class="slide--css__content__half__shaq" src="images/shaq.png">
+					<pre><code class="snippet js">
 // Spinning with Web Animations API
 var shaq = document.getElementById('shaq');
 
@@ -56,7 +57,8 @@ var keyframes = [
 
 var shaqEffect = new KeyframeEffect(shaq, keyframes, timings);
 document.timeline.play(shaqEffect);
-				</code></pre>
+					</code></pre>
+				</div>
 			</div>
 		</section>
 		<section class="slide">
