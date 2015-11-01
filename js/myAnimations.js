@@ -45,3 +45,35 @@ document.getElementById('playbackRate').onclick = function () {
     document.getElementById('playbackRate').innerHTML = '.playbackRate = 2';
   }
 };
+
+var animateLeonardo = document.getElementById('leonardo').animate([
+    { transform: 'translateY(0)' },
+    { transform: 'translateY(-5em)' },
+    { transform: 'translateY(0)' }
+  ], {
+    duration: 500,
+    iterations: 1,
+    timing: 'ease-in'
+  }
+);
+
+var animateLeonardo2 = document.getElementById('leonardo2').animate([
+    { transform: 'translate(0) scaleX(-1)' },
+    { transform: 'translateY(-5em) scaleX(-1)' },
+    { transform: 'translateY(0) scaleX(-1)' }
+  ], {
+    duration: 500,
+    iterations: 1,
+    timing: 'ease-in'
+  }
+);
+
+animateLeonardo2.pause();
+
+animateLeonardo.onfinish = function() {
+  animateLeonardo2.play();
+}
+
+animateLeonardo2.onfinish = function() {
+  animateLeonardo.play();
+}

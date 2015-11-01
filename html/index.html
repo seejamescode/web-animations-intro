@@ -116,8 +116,51 @@ document.getElementById('playbackRate').onclick = function () {
 					</code></pre>
 			</div>
 		</section>
-		<section class="slide">
-			Example.
+		<section class="slide slide--finished">
+			<div class="slide__header">
+				<h2 class="slider__header__title">
+					3 &nbsp
+					<strong>The Power of onFinish</strong>
+				</h2>
+			</div>
+			<div class="slide--finished__content">
+				<img id="leonardo2" class="slide--finished__content__leonardo slide--finished__content__leonardo--alt" src="images/leonardo.png">
+				<img id="leonardo" class="slide--finished__content__leonardo" src="images/leonardo.png">
+				<br />
+				<pre class='slide--finished__content__code'><code class="snippet js">
+var animateLeonardo = document.getElementById('leonardo1').animate([
+    { transform: 'translateY(0)' },
+    { transform: 'translateY(-5em)' },
+    { transform: 'translateY(0)' }
+  ], {
+    duration: 500,
+    iterations: 1,
+    timing: 'ease-in-out'
+  }
+);
+
+var animateLeonardo2 = document.getElementById('leonardo2').animate([
+    { transform: 'translate(0) scaleX(-1)' },
+    { transform: 'translateY(-5em) scaleX(-1)' },
+    { transform: 'translateY(0) scaleX(-1)' }
+  ], {
+    duration: 500,
+    iterations: 1,
+    timing: 'ease-in-out'
+  }
+);
+
+animateLeonardo2.pause();
+
+animateLeonardo.onfinish = function() {
+  animateLeonardo2.play();
+}
+
+animateLeonardo2.onfinish = function() {
+  animateLeonardo.play();
+}
+					</code></pre>
+			</div>
 		</section>
 		<script src="js/myAnimations.js"></script>
 	</body>
