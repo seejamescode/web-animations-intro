@@ -126,6 +126,25 @@ code {
   }
 }
 
+.slide--timeline {
+  .slide--timeline__content {
+    width: 100%;
+
+    .slide--timeline__content__shark {
+      width: 30%;
+    }
+
+    .slide--timeline__content__katy {
+      width: 20%;
+    }
+
+    .slide--timeline__content__code {
+      padding: 1em;
+      width: calc(100% - 2em);
+    }
+  }
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0);

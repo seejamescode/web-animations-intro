@@ -79,3 +79,53 @@ animateLeonardo.onfinish = function() {
 animateLeonardo2.onfinish = function() {
   animateLeonardo.play();
 }
+
+var leftSharkLeftFin = document.querySelector('#shark1-LeftFin').animate([
+    {transform: 'scale(1) rotate(0deg)'},
+    {transform: 'scale(0.95) rotate(70deg) translate(-40%,-37%)'}
+], {
+    duration: 1000,
+    direction: 'alternate',
+    iterations: Infinity
+});
+
+leftSharkLeftFin.currentTime = 500;
+
+var leftSharkRightFin = document.querySelector('#shark1-RightFin').animate([
+    {transform: 'scale(1) rotate(0deg)'},
+    {transform: 'scale(0.95) rotate(-70deg) translate(30%,-50%)'}
+], {
+    duration: 1000,
+    direction: 'alternate',
+    iterations: Infinity
+});
+
+var rightSharkLeftFin = document.querySelector('#shark2-LeftFin').animate([
+    {transform: 'scale(1) rotate(0deg)'},
+    {transform: 'scale(0.95) rotate(70deg) translate(-40%,-37%)'}
+], {
+    duration: 1000,
+    direction: 'alternate',
+    iterations: Infinity
+});
+
+var rightSharkRightFin = document.querySelector('#shark2-RightFin').animate([
+    {transform: 'scale(1) rotate(0deg)'},
+    {transform: 'scale(0.95) rotate(-70deg) translate(30%,-50%)'}
+], {
+    duration: 1000,
+    direction: 'alternate',
+    iterations: Infinity
+});
+
+var syncButton = document.getElementById('sync');
+
+syncButton.onclick = function () {
+  if (syncButton.innerHTML === 'leftSharkLeftFin.currentTime = rightSharkLeftFin.currentTime') {
+    leftSharkLeftFin.currentTime = rightSharkLeftFin.currentTime;
+    syncButton.innerHTML = 'Unsync';
+  } else {
+    leftSharkLeftFin.currentTime = 500;
+    syncButton.innerHTML = 'leftSharkLeftFin.currentTime = rightSharkLeftFin.currentTime';
+  }
+};
