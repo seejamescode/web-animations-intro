@@ -39,13 +39,12 @@ code {
 }
 
 .slide {
-  border-bottom: 1px solid $black;
   text-align: center;
 
   .slide__header {
     padding: 1.5em 2em;
     text-align: left;
-    width: 100%;
+    width: calc(100% - 4em);
 
     .slider__header__title {
       font-weight: 400;
@@ -118,10 +117,6 @@ code {
 
     .slide--finished__content__leonardo {
       height: 10em;
-
-      &.slide--finished__content__leonardo--alt {
-        transform: scaleX(-1);
-      }
     }
 
     .slide--finished__content__code {

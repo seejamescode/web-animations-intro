@@ -46,23 +46,25 @@ document.getElementById('playbackRate').onclick = function () {
   }
 };
 
-var animateLeonardo = document.getElementById('leonardo').animate([
+var leapingLeo = document.getElementById('leonardo');
+
+var animateLeonardo = leapingLeo.animate([
     { transform: 'translateY(0)' },
     { transform: 'translateY(-5em)' },
     { transform: 'translateY(0)' }
   ], {
-    duration: 500,
+    duration: 750,
     iterations: 1,
     timing: 'ease-in'
   }
 );
 
-var animateLeonardo2 = document.getElementById('leonardo2').animate([
+var animateLeonardo2 = leapingLeo.animate([
     { transform: 'translate(0) scaleX(-1)' },
     { transform: 'translateY(-5em) scaleX(-1)' },
     { transform: 'translateY(0) scaleX(-1)' }
   ], {
-    duration: 500,
+    duration: 750,
     iterations: 1,
     timing: 'ease-in'
   }

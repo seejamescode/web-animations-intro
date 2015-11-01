@@ -124,29 +124,30 @@ document.getElementById('playbackRate').onclick = function () {
 				</h2>
 			</div>
 			<div class="slide--finished__content">
-				<img id="leonardo2" class="slide--finished__content__leonardo slide--finished__content__leonardo--alt" src="images/leonardo.png">
 				<img id="leonardo" class="slide--finished__content__leonardo" src="images/leonardo.png">
 				<br />
 				<pre class='slide--finished__content__code'><code class="snippet js">
-var animateLeonardo = document.getElementById('leonardo1').animate([
+var leapingLeo = document.getElementById('leonardo');
+
+var animateLeonardo = leapingLeo.animate([
     { transform: 'translateY(0)' },
     { transform: 'translateY(-5em)' },
     { transform: 'translateY(0)' }
   ], {
-    duration: 500,
+    duration: 750,
     iterations: 1,
-    timing: 'ease-in-out'
+    timing: 'ease-in'
   }
 );
 
-var animateLeonardo2 = document.getElementById('leonardo2').animate([
+var animateLeonardo2 = leapingLeo.animate([
     { transform: 'translate(0) scaleX(-1)' },
     { transform: 'translateY(-5em) scaleX(-1)' },
     { transform: 'translateY(0) scaleX(-1)' }
   ], {
-    duration: 500,
+    duration: 750,
     iterations: 1,
-    timing: 'ease-in-out'
+    timing: 'ease-in'
   }
 );
 
