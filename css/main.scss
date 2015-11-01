@@ -19,20 +19,38 @@ code {
 }
 
 .body {
-  background-color: $black;
   margin: 0;
   padding: 0;
 }
 
+.btn {
+  background: $white;
+  border: solid $black 2px;
+  color: $black;
+  margin: 0.5em;
+  padding: 0.5em 1em;
+  text-decoration: none;
+
+  &:hover {
+    background: $black;
+    color: $white;
+    text-decoration: none;
+  }
+}
+
 .slide {
-  align-items: center;
-  background-color: $white;
   border-bottom: 1px solid $black;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  overflow: hidden;
   text-align: center;
+
+  .slide__header {
+    padding: 1.5em 2em;
+    text-align: left;
+    width: 100%;
+
+    .slider__header__title {
+      font-weight: 400;
+    }
+  }
 }
 
 .snippet {
@@ -84,10 +102,6 @@ code {
 
     .slide--play__content__batmobile {
       width: 50%;
-    }
-
-    .slide--play__content__button {
-
     }
 
     .slide--play__content__code {

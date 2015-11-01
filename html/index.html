@@ -17,10 +17,12 @@
 			<p>James Y. Rauhut</p>
 		</section>
 		<section class="slide slide--css">
-			<h2>
-				1. 
-				<strong>Looks Similar to CSS</strong>
-			</h2>
+			<div class="slide__header">
+				<h2 class="slider__header__title">
+					1 &nbsp 
+					<strong>Looks Similar to CSS</strong>
+				</h2>
+			</div>
 			<div class="slide--css__content">
 				<div class="slide--css__content__half">
 					<img class="slide--css__content__half__shaq slide--css__content__half__shaq--css" src="images/shaq.png">
@@ -56,19 +58,21 @@ var animateShaq = document.getElementById('shaq').animate([
 			</div>
 		</section>
 		<section class="slide slide--play">
-			<h2>
-				2. 
-				<strong>Play States and Other Goodies</strong>
-			</h2>
+			<div class="slide__header">
+				<h2 class="slider__header__title">
+					2 &nbsp
+					<strong>Play States and Other Goodies</strong>
+				</h2>
+			</div>
 			<div class="slide--play__content">
-				<img id="batmobile" class="slide--play__content__batmobile" src="images/batmobile.png">
+				<img id="batmobile" class="slide--play__content__batmobile" src="images/batmobile.png" alt="batmobile">
 				<br />
-				<button id="play" class="slide--play__content__button" type="button">.play()</button>
-				<button id="pause" class="slide--play__content__button" type="button">.pause()</button>
-				<button id="cancel" class="slide--play__content__button" type="button">.cancel()</button>
-				<button id="finish" class="slide--play__content__button" type="button">.finish()</button>
-				<button id="reverse" class="slide--play__content__button" type="button">.reverse()</button>
-				<button id="playbackRate" class="slide--play__content__button" type="button">.playbackRate = 2</button>
+				<button id="play" class="btn" type="button">.play()</button>
+				<button id="pause" class="btn" type="button">.pause()</button>
+				<button id="cancel" class="btn" type="button">.cancel()</button>
+				<button id="finish" class="btn" type="button">.finish()</button>
+				<button id="reverse" class="btn" type="button">.reverse()</button>
+				<button id="playbackRate" class="btn" type="button">.playbackRate = 2</button>
 				<br />
 				<pre class='slide--play__content__code'><code class="snippet js">
 var animateBatmobile = document.getElementById('batmobile').animate([
