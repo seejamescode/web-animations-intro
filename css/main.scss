@@ -14,6 +14,10 @@ pre {
   width: 100%;
 }
 
+code {
+  height: 15em;
+}
+
 .body {
   background-color: $black;
   margin: 0;
@@ -22,11 +26,11 @@ pre {
 
 .slide {
   align-items: center;
-  background-color: $blue;
+  background-color: $white;
+  border-bottom: 1px solid $black;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 100vh;
   overflow: hidden;
   text-align: center;
 }
@@ -36,44 +40,59 @@ pre {
   text-align: left;
 }
 
-.slide--css {
-  background-color: $white;
+.slide--css__content {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  text-align: center;
 
-  .slide--css__content {
+  .slide--css__content__half {
     align-items: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
     overflow: hidden;
+    padding: 1em;
     text-align: center;
+    width: calc(100% - 2em);
 
-    .slide--css__content__half {
-      align-items: center;
-      display: flex;
-      flex-direction: column;
-      width: 80%;
-      justify-content: center;
-      overflow: hidden;
-      padding: 1em;
-      text-align: center;
-
-      .slide--css__content__half__shaq {
-        height: 30%;
-        margin-right: 1em;
-        width: 30%;
-      }
-
-      .slide--css__content__half__shaq--css {
-        animation: spin 5s linear infinite;
-      }
+    .slide--css__content__half__shaq {
+      height: 30%;
+      margin-right: 1em;
+      width: 30%;
     }
 
-    @media (min-width: 660px) {
-      flex-direction: row;
+    .slide--css__content__half__shaq--css {
+      animation: spin 5s linear infinite;
+    }
+  }
 
-      .slide--css__content__half {
-        width: 50%;
-      }
+  @media (min-width: 1000px) {
+    flex-direction: row;
+
+    .slide--css__content__half {
+      width: 50%;
+    }
+  }
+}
+
+.slide--play {
+  .slide--play__content {
+    width: 100%;
+
+    .slide--play__content__batmobile {
+      width: 50%;
+    }
+
+    .slide--play__content__button {
+
+    }
+
+    .slide--play__content__code {
+      padding: 1em;
+      width: calc(100% - 2em);
     }
   }
 }

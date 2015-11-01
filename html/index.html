@@ -18,7 +18,7 @@
 		</section>
 		<section class="slide slide--css">
 			<h2>
-				Benefits:
+				1. 
 				<strong>Looks Similar to CSS</strong>
 			</h2>
 			<div class="slide--css__content">
@@ -43,26 +43,74 @@
 					<img id="shaq" class="slide--css__content__half__shaq" src="images/shaq.png">
 					<pre><code class="snippet js">
 // Spinning with Web Animations API
-var shaq = document.getElementById('shaq');
-
-var timings = {
-  duration: 5000,
-  iterations: Infinity
-};
-
-var keyframes = [
-  { transform: 'rotate(0)' },
-  { transform: 'rotate(360deg)' }
-];
-
-var shaqEffect = new KeyframeEffect(shaq, keyframes, timings);
-document.timeline.play(shaqEffect);
+var animateShaq = document.getElementById('shaq').animate([
+    { transform: 'rotate(0)' },
+    { transform: 'rotate(360deg)' }
+  ], {
+    duration: 5000,
+    iterations: Infinity
+  }
+);
 					</code></pre>
 				</div>
 			</div>
 		</section>
-		<section class="slide">
-			Now.
+		<section class="slide slide--play">
+			<h2>
+				2. 
+				<strong>Play States and Other Goodies</strong>
+			</h2>
+			<div class="slide--play__content">
+				<img id="batmobile" class="slide--play__content__batmobile" src="images/batmobile.png">
+				<br />
+				<button id="play" class="slide--play__content__button" type="button">.play()</button>
+				<button id="pause" class="slide--play__content__button" type="button">.pause()</button>
+				<button id="cancel" class="slide--play__content__button" type="button">.cancel()</button>
+				<button id="finish" class="slide--play__content__button" type="button">.finish()</button>
+				<button id="reverse" class="slide--play__content__button" type="button">.reverse()</button>
+				<button id="playbackRate" class="slide--play__content__button" type="button">.playbackRate = 2</button>
+				<br />
+				<pre class='slide--play__content__code'><code class="snippet js">
+var animateBatmobile = document.getElementById('batmobile').animate([
+    { transform: 'translateX(150%)' },
+    { transform: 'translateX(-150%)' }
+  ], {
+    duration: 4000,
+    iterations: 1
+  }
+);
+
+document.getElementById('play').onclick = function () {
+  animateBatmobile.play();
+};
+
+document.getElementById('pause').onclick = function () {
+  animateBatmobile.pause();
+};
+
+document.getElementById('cancel').onclick = function () {
+  animateBatmobile.cancel();
+};
+
+document.getElementById('finish').onclick = function () {
+  animateBatmobile.finish();
+};
+
+document.getElementById('reverse').onclick = function () {
+  animateBatmobile.reverse();
+};
+
+document.getElementById('playbackRate').onclick = function () {
+  if (animateBatmobile.playbackRate === 1) {
+    animateBatmobile.playbackRate = 2;
+    document.getElementById('playbackRate').innerHTML = '.playbackRate = 1';
+  } else {
+    animateBatmobile.playbackRate = 1;
+    document.getElementById('playbackRate').innerHTML = '.playbackRate = 2';
+  }
+};
+					</code></pre>
+			</div>
 		</section>
 		<section class="slide">
 			Example.
