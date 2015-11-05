@@ -145,6 +145,22 @@ code {
   }
 }
 
+.slide--multiple {
+  .slide--multiple__content {
+    width: 100%;
+
+    .slide--multiple__content__slimer {
+      border-radius: 50%;
+      width: 80%;
+    }
+
+    .slide--multiple__content__code {
+      padding: 1em;
+      width: calc(100% - 2em);
+    }
+  }
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0);

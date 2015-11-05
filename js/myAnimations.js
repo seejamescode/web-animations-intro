@@ -129,3 +129,69 @@ syncButton.onclick = function () {
     syncButton.innerHTML = 'leftSharkLeftFin.currentTime = rightSharkLeftFin.currentTime';
   }
 };
+
+var slimer = document.getElementById('slimer');
+
+var animateOpacity = slimer.animate([
+    { opacity: '.9' },
+    { opacity: '.1' }
+  ], {
+    direction: 'alternate',
+    duration: 4000,
+    iterations: Infinity
+  }
+);
+
+var animateFloat = slimer.animate([
+    { transform: 'translateY(0)' },
+    { transform: 'translateY(-1em)' },
+    { transform: 'translateY(0)' }
+  ], {
+    duration: 2000,
+    iterations: Infinity
+  }
+);
+
+var animateBackground = slimer.animate([
+    { background: 'repeating-radial-gradient(#b8e7bf, #b8e7bf 5px, white 5px, white 10px)' },
+    { background: 'repeating-radial-gradient(white, white 5px, #b8e7bf 5px, #b8e7bf 10px)' }
+  ], {
+    duration: 300,
+    iterations: Infinity
+  }
+);
+
+var elmOpacity = document.getElementById('opacity');
+var elmFloat = document.getElementById('float');
+
+elmOpacity.onclick = function () {
+  if (elmOpacity.innerHTML === 'animateOpacity.pause()') {
+    animateOpacity.pause();
+    elmOpacity.innerHTML = 'animateOpacity.play()';
+  } else {
+    animateOpacity.play();
+    elmOpacity.innerHTML = 'animateOpacity.pause()';
+  }
+};
+
+elmFloat.onclick = function () {
+  if (elmFloat.innerHTML === 'animateFloat.pause()') {
+    animateFloat.pause();
+    elmFloat.innerHTML = 'animateFloat.play()';
+  } else {
+    animateFloat.play();
+    elmFloat.innerHTML = 'animateFloat.pause()';
+  }
+};
+
+var backgroundSlider = document.getElementById('background');
+var backgroundValueDisplay = document.getElementById('backgroundValue');
+
+backgroundSlider.addEventListener('change', function() {
+  animateBackground.playbackRate = backgroundSlider.value;
+  backgroundValueDisplay.innerHTML = animateBackground.playbackRate;
+});
+
+
+
+
