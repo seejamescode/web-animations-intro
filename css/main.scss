@@ -116,7 +116,7 @@ code {
     width: 100%;
 
     .slide--finished__content__leonardo {
-      height: 10em;
+      height: 15em;
     }
 
     .slide--finished__content__code {
@@ -157,6 +157,17 @@ code {
     .slide--multiple__content__code {
       padding: 1em;
       width: calc(100% - 2em);
+    }
+  }
+}
+
+.slide--support {
+  .slide--support__content {
+    padding-top: 5em;
+    width: 100%;
+
+    .slide--support__content__img {
+      width: 10%;
     }
   }
 }

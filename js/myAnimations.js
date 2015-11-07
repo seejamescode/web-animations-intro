@@ -192,6 +192,18 @@ backgroundSlider.addEventListener('change', function() {
   backgroundValueDisplay.innerHTML = animateBackground.playbackRate;
 });
 
-
-
-
+var browsers = document.getElementsByClassName("slide--support__content__img");
+var delay = 0;
+for(var i = 0; i < browsers.length; i++) {
+  browsers[i].animate([
+    {transform: 'translateY(0)'},
+    {transform: 'translateY(-5em)'}
+  ], {
+    duration: 1000,
+    delay: delay,
+    easing: 'ease-in-out',
+    iterations: Infinity,
+    direction: 'alternate'
+  });
+  delay = delay + 250;
+}
