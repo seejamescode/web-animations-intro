@@ -82,7 +82,7 @@ gulp.task('browser-sync', function() {
     browserSync.init(['**/css/*', '**/js/*', '**/html/*', '**/images/*'], {
         server: {
             host: "local.dev",
-            baseDir: "./static/"
+            baseDir: "./production/"
         },
         open: true,
         ghostMode: false

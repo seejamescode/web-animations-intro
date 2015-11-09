@@ -1,0 +1,199 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Intro to Web Animations API</title><link rel="stylesheet" type="text/css" href="./css/normalize.min.css"><link rel="stylesheet" type="text/css" href="./css/main.min.css"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/default.min.css"><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/highlight.min.js"></script><script src="js/web-animations-next.min.js"></script><script>hljs.initHighlightingOnLoad();</script></head><body class="body"><section class="slide slide--title"><h1 id="title-animation" class="slide--title__h1">The Web Animations API</h1><h2 id="h2-animation" class="slide--title__h2">FINALLY</h2><p>An quick intro by <a href="https://twitter.com/seejamescode" target="_blank">James Y Rauhut.</a><br>Much content taken from <a href="https://birtles.wordpress.com/2013/06/26/introducing-web-animations/" target="_blank">Brian Birtles</a> and <a href="http://danielcwilson.com/blog/2015/07/animations-intro/" target="_blank">Dan Wilson</a>.</p></section><section class="slide slide--support" style="overflow: hidden;"><div class="slide__header"><h2 class="slider__header__title"><strong>History</strong></h2><p>During my final creative project for a certificate in college, I got really into SMIL animations for SVGs. I thought they were the bomb.com because it allowed me to program animations without third party tools.</p><p>However, I would always get mad at Microsoft for never properly supporting them:<blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">Really wish <a href="https://twitter.com/hashtag/IE?src=hash">#IE</a> and <a href="https://twitter.com/MicrosoftEdge">@MicrosoftEdge</a> would support SMIL and CSS animations in <a href="https://twitter.com/hashtag/SVG?src=hash">#SVG</a>. The power of animation is great!</p>&mdash; James Y Rauhut (@seejamescode) <a href="https://twitter.com/seejamescode/status/642176644573036544">September 11, 2015</a></blockquote><script async="" src="//platform.twitter.com/widgets.js" charset="utf-8"></script></p><p>Turns out there was good reasoning for the IE/Edge team to never develop for SVG animations: They knew that making a specific way for SVG animations was too small of a scope and that there needed to be a single model for all web animation.</p><p>So Adobe, Google, and Mozilla gave us a working spec called the Web Animations API! While Microsoft did not participate in the development of WAAPI, I did appreciate that they helped influence it's creation.<blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">I&#39;m sorry <a href="https://twitter.com/MicrosoftEdge">@MicrosoftEdge</a> for being so frustrated that you did not love SMIL animations.</p>&mdash; James Y Rauhut (@seejamescode) <a href="https://twitter.com/seejamescode/status/663556014478757888">November 9, 2015</a></blockquote></p><p>Now some of the stuff I am about to show may not blow your mind. You may say "I could always pull this off with CSS animations or a third-party tool."</p><p>But that is not the point. The point is that this is finally becoming something native for browsers in the web developers' most commonly used scripting language!<blockquote class="twitter-tweet" data-conversation="none" lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/MicrosoftEdge">@MicrosoftEdge</a> Now if you could please escalate the Web Animations API to higher priority than the Karaoke Web Standard, that would be great</p>&mdash; James Y Rauhut (@seejamescode) <a href="https://twitter.com/seejamescode/status/663556765535997952">November 9, 2015</a></blockquote></p><p>Now lets check out some things that the Web Animations API has to offer!</p></div></section><section class="slide slide--css"><div class="slide__header"><h2 class="slider__header__title">1 &nbsp <strong>Looks Similar to CSS</strong></h2></div><div class="slide--css__content"><div class="slide--css__content__half"><img class="slide--css__content__half__shaq slide--css__content__half__shaq--css" src="images/shaq.png"><pre><code class="snippet css">
+/* Spinning with CSS */
+.shaq {animation: spin 5s linear infinite;}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+					</code></pre></div><div class="slide--css__content__half"><img id="shaq" class="slide--css__content__half__shaq" src="images/shaq.png"><pre><code class="snippet js">
+// Spinning with Web Animations API
+var animateShaq = document.getElementById('shaq').animate([
+    { transform: 'rotate(0)' },
+    { transform: 'rotate(360deg)' }
+  ], {
+    duration: 5000,
+    iterations: Infinity
+  }
+);
+					</code></pre></div></div></section><section class="slide slide--play" style="overflow: hidden;"><div class="slide__header"><h2 class="slider__header__title">2 &nbsp <strong>Play States and Other Goodies</strong></h2></div><div class="slide--play__content"><img id="batmobile" class="slide--play__content__batmobile" src="images/batmobile.png" alt="batmobile"><br><button id="play" class="btn" type="button">.play()</button> <button id="pause" class="btn" type="button">.pause()</button> <button id="cancel" class="btn" type="button">.cancel()</button> <button id="finish" class="btn" type="button">.finish()</button> <button id="reverse" class="btn" type="button">.reverse()</button> <button id="playbackRate" class="btn" type="button">.playbackRate = 2</button><br><pre class="slide--play__content__code"><code class="snippet js">
+var animateBatmobile = document.getElementById('batmobile').animate([
+    { transform: 'translateX(150%)' },
+    { transform: 'translateX(-150%)' }
+  ], {
+    duration: 4000,
+    iterations: 1
+  }
+);
+
+document.getElementById('play').onclick = function () {
+  animateBatmobile.play();
+};
+
+document.getElementById('pause').onclick = function () {
+  animateBatmobile.pause();
+};
+
+document.getElementById('cancel').onclick = function () {
+  animateBatmobile.cancel();
+};
+
+document.getElementById('finish').onclick = function () {
+  animateBatmobile.finish();
+};
+
+document.getElementById('reverse').onclick = function () {
+  animateBatmobile.reverse();
+};
+
+document.getElementById('playbackRate').onclick = function () {
+  if (animateBatmobile.playbackRate === 1) {
+    animateBatmobile.playbackRate = 2;
+    document.getElementById('playbackRate').innerHTML = '.playbackRate = 1';
+  } else {
+    animateBatmobile.playbackRate = 1;
+    document.getElementById('playbackRate').innerHTML = '.playbackRate = 2';
+  }
+};
+					</code></pre></div></section><section class="slide slide--finished"><div class="slide__header"><h2 class="slider__header__title">3 &nbsp <strong>The Power of onFinish</strong></h2></div><div class="slide--finished__content"><img id="leonardo" class="slide--finished__content__leonardo" src="images/leonardo.png"><br><pre class="slide--finished__content__code"><code class="snippet js">
+var leapingLeo = document.getElementById('leonardo');
+
+var animateLeonardo = leapingLeo.animate([
+    { transform: 'translateY(0)' },
+    { transform: 'translateY(-5em)' },
+    { transform: 'translateY(0)' }
+  ], {
+    duration: 750,
+    iterations: 1,
+    timing: 'ease-in'
+  }
+);
+
+var animateLeonardo2 = leapingLeo.animate([
+    { transform: 'translate(0) scaleX(-1)' },
+    { transform: 'translateY(-5em) scaleX(-1)' },
+    { transform: 'translateY(0) scaleX(-1)' }
+  ], {
+    duration: 750,
+    iterations: 1,
+    timing: 'ease-in'
+  }
+);
+
+animateLeonardo2.pause();
+
+animateLeonardo.onfinish = function() {
+  animateLeonardo2.play();
+}
+
+animateLeonardo2.onfinish = function() {
+  animateLeonardo.play();
+}
+					</code></pre></div></section><section class="slide slide--timeline"><div class="slide__header"><h2 class="slider__header__title">4 &nbsp <strong>You Have a Timeline</strong></h2></div><div class="slide--timeline__content"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" id="shark" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewbox="0 0 1000 1000" style="enable-background:new 0 0 1000 1000;" class="slide--timeline__content__shark" xml:space="preserve"><style type="text/css">
+						.st0{fill:#0B8EFF;}
+						.st1{fill:#FFFFFF;}
+						.st2{fill:#0C0912;}
+					</style><g id="sharkRight"><g id="shark1-RightFin"><path class="st0" d="M942.1,511.1c6.8,14.4,7.6,15.9-10.2,24.6c-4.8,2.3-10.1,3.5-15.2,3.4c-142.9-3.3-274.1-63.1-328-95.6 c-12.5-7.6-7.5-22.6-5.2-37.1c4.3-27.6,3.9-64.7,18.7-71.8C621.1,325.7,929.3,484.2,942.1,511.1z"></path><path class="st1" d="M937.2,524.3c-39.5,18.8-324.1-67.1-341.2-103c-3.9-7.6,17.1-63.5,16.3-65.1 C630.5,347.6,925,498.8,937.2,524.3z"></path></g></g><g id="sharkBody"><g id="sharkBodyGroup_1_"><path class="st0" d="M383.3,953.8c-15.7,0-28.2-34.6-28.7-78.6c0-2,0.2-3.9,0.6-5.9c40.2-183.4,25.9-245.9,25.9-332.3 C275,254.9,393.2,90.9,517.3,6.2c61.4,0,95.8,125.9,96.2,352c0,2,1,3.8,2.5,5c16,11.6,31.3,130.1,31.8,249.1c0,2.8,1,5.5,2.9,7.5 c23.4,24.6,72.7,244.4,86.7,311.6c10,0,39.5,18.7,48.7,29.5c1.7,2,2.6,4.5,2.5,7.1c-0.3,18-3.6,22.1-16.3,22.1 c-87.6,0-119.8-6.8-119.8-25.3c0-132.6-64-266.5-127.3-266.5c-30,45.1-91.5,96.2-91.5,215c18.5,0,33.5,16.2,33.5,36.3 C467.4,953.8,467.4,953.8,383.3,953.8"></path><path class="st1" d="M534.5,25.8c-44.7,0-101,214.3-101,384.2c0,43,84.3,259.3,101,259.3c43.9-41.2,87.7-160.9,75.8-226 C610.3,175.1,583.1,25.8,534.5,25.8z"></path><path class="st2" d="M453.4,316.2c3.5-43.7,113.7-91,134.2-43.7C572.3,256.9,461,302.8,453.4,316.2z"></path><path class="st1" d="M577.1,269.3c-11.9-8.7-23.5-4.8-27.1,3.9c-10.9-10.5-19.2,0.4-19.3,4.3c-11.4-10.1-18.6,1.5-18.8,6.3 c-13-9.2-18,3.4-18.2,8c-12.5-8.4-18.4,1.5-18.7,9.7c-7.2-5.3-10.8-2-11,6.4C531.7,275.8,539.7,276.2,577.1,269.3L577.1,269.3"></path><path class="st1" d="M544.1,256.8c1.7,7.6-7.9,11.5-20.8,3.6c1.4,8.6-7.9,10.3-16.2,5.2c1.7,10.3-4.1,9.5-15.3,7.6 c0,9.7-1.9,11.2-14.3,11.2c0,6.7-5.3,11.2-13.1,11.2c0,5.8-3.2,9.8-8.1,9.8c16.2-37.2,81.4-58,104.9-51.9 C561.3,255.3,553.6,264.4,544.1,256.8z"></path><g><path d="M372.8,271.6c0,0,0.4,0.8,1.1,2.2c0.4,0.7,0.7,1.6,1.3,2.6c0.5,1,1.1,2,1.7,3.2c0.3,0.6,0.7,1.2,1.1,1.8 c0.4,0.6,0.7,1.3,1.2,1.9c0.4,0.6,0.9,1.2,1.3,1.9c0.5,0.6,1,1.2,1.5,1.9c0.3,0.3,0.5,0.6,0.8,1c0.3,0.3,0.6,0.6,0.8,0.9 c0.3,0.3,0.6,0.6,0.9,0.9c0.3,0.3,0.6,0.6,0.9,0.9c0.6,0.6,1.3,1.1,1.9,1.7c0.7,0.5,1.3,1,2,1.6c0.7,0.5,1.4,1,2.1,1.4 c0.7,0.5,1.4,0.9,2.2,1.3c1.5,0.9,3,1.6,4.5,2.3c1.5,0.6,2.9,1.3,4.4,1.9c1.4,0.6,2.8,1.1,4,1.6c2.5,0.9,4.7,1.7,6.1,2.2 c1.5,0.5,2.3,0.9,2.3,0.9s-0.9,0-2.5-0.1c-0.8-0.1-1.8-0.1-2.9-0.3c-1.1-0.1-2.4-0.3-3.7-0.5c-0.7-0.1-1.4-0.2-2.1-0.4 c-0.7-0.1-1.5-0.3-2.2-0.5c-1.5-0.3-3.1-0.9-4.8-1.4c-1.6-0.6-3.3-1.3-5-2.2c-0.8-0.4-1.7-0.8-2.4-1.4c-0.8-0.5-1.6-1-2.4-1.6 c-0.7-0.6-1.5-1.2-2.2-1.8c-0.7-0.6-1.4-1.3-2-2c-0.7-0.6-1.2-1.4-1.8-2.1c-0.3-0.4-0.6-0.7-0.9-1.1c-0.3-0.4-0.5-0.7-0.7-1.1 c-0.5-0.7-1-1.4-1.4-2.2c-0.4-0.8-0.8-1.5-1.1-2.2c-0.4-0.7-0.7-1.4-0.9-2.1c-0.3-0.7-0.5-1.4-0.8-2c-0.5-1.3-0.8-2.6-1.1-3.6 c-0.3-1.1-0.4-2-0.6-2.8C372.9,272.5,372.8,271.6,372.8,271.6z"></path></g><g><path d="M369.8,288.6c0,0,0.4,0.8,1.1,2.2c0.4,0.7,0.7,1.6,1.3,2.6c0.5,1,1.1,2,1.7,3.2c0.3,0.6,0.7,1.2,1.1,1.8 c0.4,0.6,0.7,1.3,1.2,1.9c0.4,0.6,0.9,1.2,1.3,1.9c0.5,0.6,1,1.2,1.5,1.9c0.3,0.3,0.5,0.6,0.8,1c0.3,0.3,0.6,0.6,0.8,0.9 c0.3,0.3,0.6,0.6,0.9,0.9c0.3,0.3,0.6,0.6,0.9,0.9c0.6,0.6,1.3,1.1,1.9,1.7c0.7,0.5,1.3,1,2,1.6c0.7,0.5,1.4,1,2.1,1.4 c0.7,0.5,1.4,0.9,2.2,1.3c1.5,0.9,3,1.6,4.5,2.3c1.5,0.6,2.9,1.3,4.4,1.9c1.4,0.6,2.8,1.1,4,1.6c2.5,0.9,4.7,1.7,6.1,2.2 c1.5,0.5,2.3,0.9,2.3,0.9s-0.9,0-2.5-0.1c-0.8-0.1-1.8-0.1-2.9-0.3c-1.1-0.1-2.4-0.3-3.7-0.5c-0.7-0.1-1.4-0.2-2.1-0.4 c-0.7-0.1-1.5-0.3-2.2-0.5c-1.5-0.3-3.1-0.9-4.8-1.4c-1.6-0.6-3.3-1.3-5-2.2c-0.8-0.4-1.7-0.8-2.4-1.4c-0.8-0.5-1.6-1-2.4-1.6 c-0.7-0.6-1.5-1.2-2.2-1.8c-0.7-0.6-1.4-1.3-2-2c-0.7-0.6-1.2-1.4-1.8-2.1c-0.3-0.4-0.6-0.7-0.9-1.1c-0.3-0.4-0.5-0.7-0.7-1.1 c-0.5-0.7-1-1.4-1.4-2.2c-0.4-0.8-0.8-1.5-1.1-2.2c-0.4-0.7-0.7-1.4-0.9-2.1c-0.3-0.7-0.5-1.4-0.8-2c-0.5-1.3-0.8-2.6-1.1-3.6 c-0.3-1.1-0.4-2-0.6-2.8C369.9,289.5,369.8,288.6,369.8,288.6z"></path></g><g><path d="M364.8,301.6c0,0,0.4,0.8,1.1,2.2c0.4,0.7,0.7,1.6,1.3,2.6c0.5,1,1.1,2,1.7,3.2c0.3,0.6,0.7,1.2,1.1,1.8 c0.4,0.6,0.7,1.3,1.2,1.9c0.4,0.6,0.9,1.2,1.3,1.9c0.5,0.6,1,1.2,1.5,1.9c0.3,0.3,0.5,0.6,0.8,1c0.3,0.3,0.6,0.6,0.8,0.9 c0.3,0.3,0.6,0.6,0.9,0.9c0.3,0.3,0.6,0.6,0.9,0.9c0.6,0.6,1.3,1.1,1.9,1.7c0.7,0.5,1.3,1,2,1.6c0.7,0.5,1.4,1,2.1,1.4 c0.7,0.5,1.4,0.9,2.2,1.3c1.5,0.9,3,1.6,4.5,2.3c1.5,0.6,2.9,1.3,4.4,1.9c1.4,0.6,2.8,1.1,4,1.6c2.5,0.9,4.7,1.7,6.1,2.2 c1.5,0.5,2.3,0.9,2.3,0.9s-0.9,0-2.5-0.1c-0.8-0.1-1.8-0.1-2.9-0.3c-1.1-0.1-2.4-0.3-3.7-0.5c-0.7-0.1-1.4-0.2-2.1-0.4 c-0.7-0.1-1.5-0.3-2.2-0.5c-1.5-0.3-3.1-0.9-4.8-1.4c-1.6-0.6-3.3-1.3-5-2.2c-0.8-0.4-1.7-0.8-2.4-1.4c-0.8-0.5-1.6-1-2.4-1.6 c-0.7-0.6-1.5-1.2-2.2-1.8c-0.7-0.6-1.4-1.3-2-2c-0.7-0.6-1.2-1.4-1.8-2.1c-0.3-0.4-0.6-0.7-0.9-1.1c-0.3-0.4-0.5-0.7-0.7-1.1 c-0.5-0.7-1-1.4-1.4-2.2c-0.4-0.8-0.8-1.5-1.1-2.2c-0.4-0.7-0.7-1.4-0.9-2.1c-0.3-0.7-0.5-1.4-0.8-2c-0.5-1.3-0.8-2.6-1.1-3.6 c-0.3-1.1-0.4-2-0.6-2.8C364.9,302.5,364.8,301.6,364.8,301.6z"></path></g><g><path d="M361.8,318.6c0,0,0.4,0.8,1.1,2.2c0.4,0.7,0.7,1.6,1.3,2.6c0.5,1,1.1,2,1.7,3.2c0.3,0.6,0.7,1.2,1.1,1.8 c0.4,0.6,0.7,1.3,1.2,1.9c0.4,0.6,0.9,1.2,1.3,1.9c0.5,0.6,1,1.2,1.5,1.9c0.3,0.3,0.5,0.6,0.8,1c0.3,0.3,0.6,0.6,0.8,0.9 c0.3,0.3,0.6,0.6,0.9,0.9c0.3,0.3,0.6,0.6,0.9,0.9c0.6,0.6,1.3,1.1,1.9,1.7c0.7,0.5,1.3,1,2,1.6c0.7,0.5,1.4,1,2.1,1.4 c0.7,0.5,1.4,0.9,2.2,1.3c1.5,0.9,3,1.6,4.5,2.3c1.5,0.6,2.9,1.3,4.4,1.9c1.4,0.6,2.8,1.1,4,1.6c2.5,0.9,4.7,1.7,6.1,2.2 c1.5,0.5,2.3,0.9,2.3,0.9s-0.9,0-2.5-0.1c-0.8-0.1-1.8-0.1-2.9-0.3c-1.1-0.1-2.4-0.3-3.7-0.5c-0.7-0.1-1.4-0.2-2.1-0.4 c-0.7-0.1-1.5-0.3-2.2-0.5c-1.5-0.3-3.1-0.9-4.8-1.4c-1.6-0.6-3.3-1.3-5-2.2c-0.8-0.4-1.7-0.8-2.4-1.4c-0.8-0.5-1.6-1-2.4-1.6 c-0.7-0.6-1.5-1.2-2.2-1.8c-0.7-0.6-1.4-1.3-2-2c-0.7-0.6-1.2-1.4-1.8-2.1c-0.3-0.4-0.6-0.7-0.9-1.1c-0.3-0.4-0.5-0.7-0.7-1.1 c-0.5-0.7-1-1.4-1.4-2.2c-0.4-0.8-0.8-1.5-1.1-2.2c-0.4-0.7-0.7-1.4-0.9-2.1c-0.3-0.7-0.5-1.4-0.8-2c-0.5-1.3-0.8-2.6-1.1-3.6 c-0.3-1.1-0.4-2-0.6-2.8C361.9,319.5,361.8,318.6,361.8,318.6z"></path></g><g><path d="M355.8,335.6c0,0,0.4,0.8,1.1,2.2c0.4,0.7,0.7,1.6,1.3,2.6c0.5,1,1.1,2,1.7,3.2c0.3,0.6,0.7,1.2,1.1,1.8 c0.4,0.6,0.7,1.3,1.2,1.9c0.4,0.6,0.9,1.2,1.3,1.9c0.5,0.6,1,1.2,1.5,1.9c0.3,0.3,0.5,0.6,0.8,1c0.3,0.3,0.6,0.6,0.8,0.9 c0.3,0.3,0.6,0.6,0.9,0.9c0.3,0.3,0.6,0.6,0.9,0.9c0.6,0.6,1.3,1.1,1.9,1.7c0.7,0.5,1.3,1,2,1.6c0.7,0.5,1.4,1,2.1,1.4 c0.7,0.5,1.4,0.9,2.2,1.3c1.5,0.9,3,1.6,4.5,2.3c1.5,0.6,2.9,1.3,4.4,1.9c1.4,0.6,2.8,1.1,4,1.6c2.5,0.9,4.7,1.7,6.1,2.2 c1.5,0.5,2.3,0.9,2.3,0.9s-0.9,0-2.5-0.1c-0.8-0.1-1.8-0.1-2.9-0.3c-1.1-0.1-2.4-0.3-3.7-0.5c-0.7-0.1-1.4-0.2-2.1-0.4 c-0.7-0.1-1.5-0.3-2.2-0.5c-1.5-0.3-3.1-0.9-4.8-1.4c-1.6-0.6-3.3-1.3-5-2.2c-0.8-0.4-1.7-0.8-2.4-1.4c-0.8-0.5-1.6-1-2.4-1.6 c-0.7-0.6-1.5-1.2-2.2-1.8c-0.7-0.6-1.4-1.3-2-2c-0.7-0.6-1.2-1.4-1.8-2.1c-0.3-0.4-0.6-0.7-0.9-1.1c-0.3-0.4-0.5-0.7-0.7-1.1 c-0.5-0.7-1-1.4-1.4-2.2c-0.4-0.8-0.8-1.5-1.1-2.2c-0.4-0.7-0.7-1.4-0.9-2.1c-0.3-0.7-0.5-1.4-0.8-2c-0.5-1.3-0.8-2.6-1.1-3.6 c-0.3-1.1-0.4-2-0.6-2.8C355.9,336.5,355.8,335.6,355.8,335.6z"></path></g><path class="st1" d="M419.6,269.7c32.5-20.8,26.7-56.6-5.1-54c-1.8,0.1-3.8,1.1-5,1.8c-31.2,19.3-16,49.7,2.7,53.6 C414.8,271.6,417.4,271.1,419.6,269.7z"></path><path d="M412.5,271.5c-11.4-1.4-39.5-28.7-5.5-52.1c1.5-1,3.4-1.6,5.2-1.3c13,1.7,40.1,26.6,3.6,52.6 C414.8,271.3,413.7,271.6,412.5,271.5z"></path><ellipse class="st1" cx="415.2" cy="228.3" rx="5.4" ry="5.4"></ellipse></g></g><g id="sharkLeft"><g id="shark1-LeftFin"><path class="st0" d="M112,642.9c-16.9,0-18.7,0-18.9-16.6c-0.1-4.5,1.2-8.9,3.7-12.7C165.1,506.7,282.2,429,337.9,400 c13-6.8,29.2-1.7,35.4,11c11.4,23.4,24.6,60,24.6,73.7C397.8,502.3,143.6,642.9,112,642.9z"></path><path class="st1" d="M101.6,634.4c0-36.6,212.1-220.9,254.2-220.9c0,7.6,15.3,68.6,17.2,68.6C373,499,131.6,634.4,101.6,634.4z"></path></g></g></svg><img class="slide--timeline__content__katy" src="images/katyperry.png"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" id="shark" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewbox="0 0 1000 1000" style="enable-background:new 0 0 1000 1000; transform: scaleX(-1);" class="slide--timeline__content__shark" xml:space="preserve"><style type="text/css">
+						.st0{fill:#0B8EFF;}
+						.st1{fill:#FFFFFF;}
+						.st2{fill:#0C0912;}
+					</style><g id="sharkRight"><g id="shark2-RightFin"><path class="st0" d="M942.1,511.1c6.8,14.4,7.6,15.9-10.2,24.6c-4.8,2.3-10.1,3.5-15.2,3.4c-142.9-3.3-274.1-63.1-328-95.6 c-12.5-7.6-7.5-22.6-5.2-37.1c4.3-27.6,3.9-64.7,18.7-71.8C621.1,325.7,929.3,484.2,942.1,511.1z"></path><path class="st1" d="M937.2,524.3c-39.5,18.8-324.1-67.1-341.2-103c-3.9-7.6,17.1-63.5,16.3-65.1 C630.5,347.6,925,498.8,937.2,524.3z"></path></g></g><g id="sharkBody"><g id="sharkBodyGroup_1_"><path class="st0" d="M383.3,953.8c-15.7,0-28.2-34.6-28.7-78.6c0-2,0.2-3.9,0.6-5.9c40.2-183.4,25.9-245.9,25.9-332.3 C275,254.9,393.2,90.9,517.3,6.2c61.4,0,95.8,125.9,96.2,352c0,2,1,3.8,2.5,5c16,11.6,31.3,130.1,31.8,249.1c0,2.8,1,5.5,2.9,7.5 c23.4,24.6,72.7,244.4,86.7,311.6c10,0,39.5,18.7,48.7,29.5c1.7,2,2.6,4.5,2.5,7.1c-0.3,18-3.6,22.1-16.3,22.1 c-87.6,0-119.8-6.8-119.8-25.3c0-132.6-64-266.5-127.3-266.5c-30,45.1-91.5,96.2-91.5,215c18.5,0,33.5,16.2,33.5,36.3 C467.4,953.8,467.4,953.8,383.3,953.8"></path><path class="st1" d="M534.5,25.8c-44.7,0-101,214.3-101,384.2c0,43,84.3,259.3,101,259.3c43.9-41.2,87.7-160.9,75.8-226 C610.3,175.1,583.1,25.8,534.5,25.8z"></path><path class="st2" d="M453.4,316.2c3.5-43.7,113.7-91,134.2-43.7C572.3,256.9,461,302.8,453.4,316.2z"></path><path class="st1" d="M577.1,269.3c-11.9-8.7-23.5-4.8-27.1,3.9c-10.9-10.5-19.2,0.4-19.3,4.3c-11.4-10.1-18.6,1.5-18.8,6.3 c-13-9.2-18,3.4-18.2,8c-12.5-8.4-18.4,1.5-18.7,9.7c-7.2-5.3-10.8-2-11,6.4C531.7,275.8,539.7,276.2,577.1,269.3L577.1,269.3"></path><path class="st1" d="M544.1,256.8c1.7,7.6-7.9,11.5-20.8,3.6c1.4,8.6-7.9,10.3-16.2,5.2c1.7,10.3-4.1,9.5-15.3,7.6 c0,9.7-1.9,11.2-14.3,11.2c0,6.7-5.3,11.2-13.1,11.2c0,5.8-3.2,9.8-8.1,9.8c16.2-37.2,81.4-58,104.9-51.9 C561.3,255.3,553.6,264.4,544.1,256.8z"></path><g><path d="M372.8,271.6c0,0,0.4,0.8,1.1,2.2c0.4,0.7,0.7,1.6,1.3,2.6c0.5,1,1.1,2,1.7,3.2c0.3,0.6,0.7,1.2,1.1,1.8 c0.4,0.6,0.7,1.3,1.2,1.9c0.4,0.6,0.9,1.2,1.3,1.9c0.5,0.6,1,1.2,1.5,1.9c0.3,0.3,0.5,0.6,0.8,1c0.3,0.3,0.6,0.6,0.8,0.9 c0.3,0.3,0.6,0.6,0.9,0.9c0.3,0.3,0.6,0.6,0.9,0.9c0.6,0.6,1.3,1.1,1.9,1.7c0.7,0.5,1.3,1,2,1.6c0.7,0.5,1.4,1,2.1,1.4 c0.7,0.5,1.4,0.9,2.2,1.3c1.5,0.9,3,1.6,4.5,2.3c1.5,0.6,2.9,1.3,4.4,1.9c1.4,0.6,2.8,1.1,4,1.6c2.5,0.9,4.7,1.7,6.1,2.2 c1.5,0.5,2.3,0.9,2.3,0.9s-0.9,0-2.5-0.1c-0.8-0.1-1.8-0.1-2.9-0.3c-1.1-0.1-2.4-0.3-3.7-0.5c-0.7-0.1-1.4-0.2-2.1-0.4 c-0.7-0.1-1.5-0.3-2.2-0.5c-1.5-0.3-3.1-0.9-4.8-1.4c-1.6-0.6-3.3-1.3-5-2.2c-0.8-0.4-1.7-0.8-2.4-1.4c-0.8-0.5-1.6-1-2.4-1.6 c-0.7-0.6-1.5-1.2-2.2-1.8c-0.7-0.6-1.4-1.3-2-2c-0.7-0.6-1.2-1.4-1.8-2.1c-0.3-0.4-0.6-0.7-0.9-1.1c-0.3-0.4-0.5-0.7-0.7-1.1 c-0.5-0.7-1-1.4-1.4-2.2c-0.4-0.8-0.8-1.5-1.1-2.2c-0.4-0.7-0.7-1.4-0.9-2.1c-0.3-0.7-0.5-1.4-0.8-2c-0.5-1.3-0.8-2.6-1.1-3.6 c-0.3-1.1-0.4-2-0.6-2.8C372.9,272.5,372.8,271.6,372.8,271.6z"></path></g><g><path d="M369.8,288.6c0,0,0.4,0.8,1.1,2.2c0.4,0.7,0.7,1.6,1.3,2.6c0.5,1,1.1,2,1.7,3.2c0.3,0.6,0.7,1.2,1.1,1.8 c0.4,0.6,0.7,1.3,1.2,1.9c0.4,0.6,0.9,1.2,1.3,1.9c0.5,0.6,1,1.2,1.5,1.9c0.3,0.3,0.5,0.6,0.8,1c0.3,0.3,0.6,0.6,0.8,0.9 c0.3,0.3,0.6,0.6,0.9,0.9c0.3,0.3,0.6,0.6,0.9,0.9c0.6,0.6,1.3,1.1,1.9,1.7c0.7,0.5,1.3,1,2,1.6c0.7,0.5,1.4,1,2.1,1.4 c0.7,0.5,1.4,0.9,2.2,1.3c1.5,0.9,3,1.6,4.5,2.3c1.5,0.6,2.9,1.3,4.4,1.9c1.4,0.6,2.8,1.1,4,1.6c2.5,0.9,4.7,1.7,6.1,2.2 c1.5,0.5,2.3,0.9,2.3,0.9s-0.9,0-2.5-0.1c-0.8-0.1-1.8-0.1-2.9-0.3c-1.1-0.1-2.4-0.3-3.7-0.5c-0.7-0.1-1.4-0.2-2.1-0.4 c-0.7-0.1-1.5-0.3-2.2-0.5c-1.5-0.3-3.1-0.9-4.8-1.4c-1.6-0.6-3.3-1.3-5-2.2c-0.8-0.4-1.7-0.8-2.4-1.4c-0.8-0.5-1.6-1-2.4-1.6 c-0.7-0.6-1.5-1.2-2.2-1.8c-0.7-0.6-1.4-1.3-2-2c-0.7-0.6-1.2-1.4-1.8-2.1c-0.3-0.4-0.6-0.7-0.9-1.1c-0.3-0.4-0.5-0.7-0.7-1.1 c-0.5-0.7-1-1.4-1.4-2.2c-0.4-0.8-0.8-1.5-1.1-2.2c-0.4-0.7-0.7-1.4-0.9-2.1c-0.3-0.7-0.5-1.4-0.8-2c-0.5-1.3-0.8-2.6-1.1-3.6 c-0.3-1.1-0.4-2-0.6-2.8C369.9,289.5,369.8,288.6,369.8,288.6z"></path></g><g><path d="M364.8,301.6c0,0,0.4,0.8,1.1,2.2c0.4,0.7,0.7,1.6,1.3,2.6c0.5,1,1.1,2,1.7,3.2c0.3,0.6,0.7,1.2,1.1,1.8 c0.4,0.6,0.7,1.3,1.2,1.9c0.4,0.6,0.9,1.2,1.3,1.9c0.5,0.6,1,1.2,1.5,1.9c0.3,0.3,0.5,0.6,0.8,1c0.3,0.3,0.6,0.6,0.8,0.9 c0.3,0.3,0.6,0.6,0.9,0.9c0.3,0.3,0.6,0.6,0.9,0.9c0.6,0.6,1.3,1.1,1.9,1.7c0.7,0.5,1.3,1,2,1.6c0.7,0.5,1.4,1,2.1,1.4 c0.7,0.5,1.4,0.9,2.2,1.3c1.5,0.9,3,1.6,4.5,2.3c1.5,0.6,2.9,1.3,4.4,1.9c1.4,0.6,2.8,1.1,4,1.6c2.5,0.9,4.7,1.7,6.1,2.2 c1.5,0.5,2.3,0.9,2.3,0.9s-0.9,0-2.5-0.1c-0.8-0.1-1.8-0.1-2.9-0.3c-1.1-0.1-2.4-0.3-3.7-0.5c-0.7-0.1-1.4-0.2-2.1-0.4 c-0.7-0.1-1.5-0.3-2.2-0.5c-1.5-0.3-3.1-0.9-4.8-1.4c-1.6-0.6-3.3-1.3-5-2.2c-0.8-0.4-1.7-0.8-2.4-1.4c-0.8-0.5-1.6-1-2.4-1.6 c-0.7-0.6-1.5-1.2-2.2-1.8c-0.7-0.6-1.4-1.3-2-2c-0.7-0.6-1.2-1.4-1.8-2.1c-0.3-0.4-0.6-0.7-0.9-1.1c-0.3-0.4-0.5-0.7-0.7-1.1 c-0.5-0.7-1-1.4-1.4-2.2c-0.4-0.8-0.8-1.5-1.1-2.2c-0.4-0.7-0.7-1.4-0.9-2.1c-0.3-0.7-0.5-1.4-0.8-2c-0.5-1.3-0.8-2.6-1.1-3.6 c-0.3-1.1-0.4-2-0.6-2.8C364.9,302.5,364.8,301.6,364.8,301.6z"></path></g><g><path d="M361.8,318.6c0,0,0.4,0.8,1.1,2.2c0.4,0.7,0.7,1.6,1.3,2.6c0.5,1,1.1,2,1.7,3.2c0.3,0.6,0.7,1.2,1.1,1.8 c0.4,0.6,0.7,1.3,1.2,1.9c0.4,0.6,0.9,1.2,1.3,1.9c0.5,0.6,1,1.2,1.5,1.9c0.3,0.3,0.5,0.6,0.8,1c0.3,0.3,0.6,0.6,0.8,0.9 c0.3,0.3,0.6,0.6,0.9,0.9c0.3,0.3,0.6,0.6,0.9,0.9c0.6,0.6,1.3,1.1,1.9,1.7c0.7,0.5,1.3,1,2,1.6c0.7,0.5,1.4,1,2.1,1.4 c0.7,0.5,1.4,0.9,2.2,1.3c1.5,0.9,3,1.6,4.5,2.3c1.5,0.6,2.9,1.3,4.4,1.9c1.4,0.6,2.8,1.1,4,1.6c2.5,0.9,4.7,1.7,6.1,2.2 c1.5,0.5,2.3,0.9,2.3,0.9s-0.9,0-2.5-0.1c-0.8-0.1-1.8-0.1-2.9-0.3c-1.1-0.1-2.4-0.3-3.7-0.5c-0.7-0.1-1.4-0.2-2.1-0.4 c-0.7-0.1-1.5-0.3-2.2-0.5c-1.5-0.3-3.1-0.9-4.8-1.4c-1.6-0.6-3.3-1.3-5-2.2c-0.8-0.4-1.7-0.8-2.4-1.4c-0.8-0.5-1.6-1-2.4-1.6 c-0.7-0.6-1.5-1.2-2.2-1.8c-0.7-0.6-1.4-1.3-2-2c-0.7-0.6-1.2-1.4-1.8-2.1c-0.3-0.4-0.6-0.7-0.9-1.1c-0.3-0.4-0.5-0.7-0.7-1.1 c-0.5-0.7-1-1.4-1.4-2.2c-0.4-0.8-0.8-1.5-1.1-2.2c-0.4-0.7-0.7-1.4-0.9-2.1c-0.3-0.7-0.5-1.4-0.8-2c-0.5-1.3-0.8-2.6-1.1-3.6 c-0.3-1.1-0.4-2-0.6-2.8C361.9,319.5,361.8,318.6,361.8,318.6z"></path></g><g><path d="M355.8,335.6c0,0,0.4,0.8,1.1,2.2c0.4,0.7,0.7,1.6,1.3,2.6c0.5,1,1.1,2,1.7,3.2c0.3,0.6,0.7,1.2,1.1,1.8 c0.4,0.6,0.7,1.3,1.2,1.9c0.4,0.6,0.9,1.2,1.3,1.9c0.5,0.6,1,1.2,1.5,1.9c0.3,0.3,0.5,0.6,0.8,1c0.3,0.3,0.6,0.6,0.8,0.9 c0.3,0.3,0.6,0.6,0.9,0.9c0.3,0.3,0.6,0.6,0.9,0.9c0.6,0.6,1.3,1.1,1.9,1.7c0.7,0.5,1.3,1,2,1.6c0.7,0.5,1.4,1,2.1,1.4 c0.7,0.5,1.4,0.9,2.2,1.3c1.5,0.9,3,1.6,4.5,2.3c1.5,0.6,2.9,1.3,4.4,1.9c1.4,0.6,2.8,1.1,4,1.6c2.5,0.9,4.7,1.7,6.1,2.2 c1.5,0.5,2.3,0.9,2.3,0.9s-0.9,0-2.5-0.1c-0.8-0.1-1.8-0.1-2.9-0.3c-1.1-0.1-2.4-0.3-3.7-0.5c-0.7-0.1-1.4-0.2-2.1-0.4 c-0.7-0.1-1.5-0.3-2.2-0.5c-1.5-0.3-3.1-0.9-4.8-1.4c-1.6-0.6-3.3-1.3-5-2.2c-0.8-0.4-1.7-0.8-2.4-1.4c-0.8-0.5-1.6-1-2.4-1.6 c-0.7-0.6-1.5-1.2-2.2-1.8c-0.7-0.6-1.4-1.3-2-2c-0.7-0.6-1.2-1.4-1.8-2.1c-0.3-0.4-0.6-0.7-0.9-1.1c-0.3-0.4-0.5-0.7-0.7-1.1 c-0.5-0.7-1-1.4-1.4-2.2c-0.4-0.8-0.8-1.5-1.1-2.2c-0.4-0.7-0.7-1.4-0.9-2.1c-0.3-0.7-0.5-1.4-0.8-2c-0.5-1.3-0.8-2.6-1.1-3.6 c-0.3-1.1-0.4-2-0.6-2.8C355.9,336.5,355.8,335.6,355.8,335.6z"></path></g><path class="st1" d="M419.6,269.7c32.5-20.8,26.7-56.6-5.1-54c-1.8,0.1-3.8,1.1-5,1.8c-31.2,19.3-16,49.7,2.7,53.6 C414.8,271.6,417.4,271.1,419.6,269.7z"></path><path d="M412.5,271.5c-11.4-1.4-39.5-28.7-5.5-52.1c1.5-1,3.4-1.6,5.2-1.3c13,1.7,40.1,26.6,3.6,52.6 C414.8,271.3,413.7,271.6,412.5,271.5z"></path><ellipse class="st1" cx="415.2" cy="228.3" rx="5.4" ry="5.4"></ellipse></g></g><g id="sharkLeft"><g id="shark2-LeftFin"><path class="st0" d="M112,642.9c-16.9,0-18.7,0-18.9-16.6c-0.1-4.5,1.2-8.9,3.7-12.7C165.1,506.7,282.2,429,337.9,400 c13-6.8,29.2-1.7,35.4,11c11.4,23.4,24.6,60,24.6,73.7C397.8,502.3,143.6,642.9,112,642.9z"></path><path class="st1" d="M101.6,634.4c0-36.6,212.1-220.9,254.2-220.9c0,7.6,15.3,68.6,17.2,68.6C373,499,131.6,634.4,101.6,634.4z"></path></g></g></svg><br><button id="sync" class="btn" type="button">leftSharkLeftFin.currentTime = rightSharkLeftFin.currentTime</button><br><pre class="slide--timeline__content__code"><code class="snippet js">
+var leftSharkLeftFin = document.querySelector('#shark1-LeftFin').animate([
+    {transform: 'scale(1) rotate(0deg)'},
+    {transform: 'scale(0.95) rotate(70deg) translate(-40%,-37%)'}
+], {
+    duration: 1000,
+    direction: 'alternate',
+    iterations: Infinity
+});
+
+leftSharkLeftFin.currentTime = 500;
+
+var rightSharkLeftFin = document.querySelector('#shark2-LeftFin').animate([
+    {transform: 'scale(1) rotate(0deg)'},
+    {transform: 'scale(0.95) rotate(70deg) translate(-40%,-37%)'}
+], {
+    duration: 1000,
+    direction: 'alternate',
+    iterations: Infinity
+});
+
+var syncButton = document.getElementById('sync');
+
+syncButton.onclick = function () {
+  if (syncButton.innerHTML === 'leftSharkLeftFin.currentTime = rightSharkLeftFin.currentTime') {
+    leftSharkLeftFin.currentTime = rightSharkLeftFin.currentTime;
+    syncButton.innerHTML = 'Unsync';
+  } else {
+    leftSharkLeftFin.currentTime = 500;
+    syncButton.innerHTML = 'leftSharkLeftFin.currentTime = rightSharkLeftFin.currentTime';
+  }
+};
+					</code></pre></div></section><section class="slide slide--multiple" style="overflow: hidden;"><div class="slide__header"><h2 class="slider__header__title">5 &nbsp <strong>Multiple Animation Players, One Element</strong></h2></div><div class="slide--multiple__content"><img id="slimer" class="slide--multiple__content__slimer" src="images/slimer.png" alt="slimer"><br><button id="opacity" class="btn" type="button">animateOpacity.pause()</button> <button id="float" class="btn" type="button">animateFloat.pause()</button><br>animateBackground.playbackRate = <span id="backgroundValue">1</span> : <input id="background" type="range" min="0" max="2" step=".25" value="1"><br><pre class="slide--multiple__content__code"><code class="snippet js">
+var slimer = document.getElementById('slimer');
+
+var animateOpacity = slimer.animate([
+    { opacity: '.9' },
+    { opacity: '.1' }
+  ], {
+    direction: 'alternate',
+    duration: 4000,
+    iterations: Infinity
+  }
+);
+
+var animateFloat = slimer.animate([
+    { transform: 'translateY(0)' },
+    { transform: 'translateY(-1em)' },
+    { transform: 'translateY(0)' }
+  ], {
+    duration: 2000,
+    iterations: Infinity
+  }
+);
+
+var animateBackground = slimer.animate([
+    { background: 'repeating-radial-gradient(#b8e7bf, #b8e7bf 5px, white 5px, white 10px)' },
+    { background: 'repeating-radial-gradient(white, white 5px, #b8e7bf 5px, #b8e7bf 10px)' }
+  ], {
+    duration: 300,
+    iterations: Infinity
+  }
+);
+
+var elmOpacity = document.getElementById('opacity');
+var elmFloat = document.getElementById('float');
+
+elmOpacity.onclick = function () {
+  if (elmOpacity.innerHTML === 'animateOpacity.pause()') {
+    animateOpacity.pause();
+    elmOpacity.innerHTML = 'animateOpacity.play()';
+  } else {
+    animateOpacity.play();
+    elmOpacity.innerHTML = 'animateOpacity.pause()';
+  }
+};
+
+elmFloat.onclick = function () {
+  if (elmFloat.innerHTML === 'animateFloat.pause()') {
+    animateFloat.pause();
+    elmFloat.innerHTML = 'animateFloat.play()';
+  } else {
+    animateFloat.play();
+    elmFloat.innerHTML = 'animateFloat.pause()';
+  }
+};
+
+var backgroundSlider = document.getElementById('background');
+var backgroundValueDisplay = document.getElementById('backgroundValue');
+
+backgroundSlider.addEventListener('change', function() {
+  animateBackground.playbackRate = backgroundSlider.value;
+  backgroundValueDisplay.innerHTML = animateBackground.playbackRate;
+});
+					</code></pre></div></section><section class="slide slide--support" style="overflow: hidden;"><div class="slide__header"><h2 class="slider__header__title">Support <strong>All the Browsers!</strong></h2><p>All major browsers are currently supported by <a href="https://github.com/web-animations/web-animations-js" target="_blank">polyfill</a>. Chrome and Firefox already natively support while it is a planned medium priority for the Edge team.</p></div><div class="slide--support__content"><img class="slide--support__content__img" src="images/chrome.png" alt="Chrome"> <img class="slide--support__content__img" src="images/firefox.png" alt="Firefox"> <img class="slide--support__content__img" src="images/edge.png" alt="Edge"> <img class="slide--support__content__img" src="images/safari.png" alt="Safari"></div></section><section class="slide slide--footer"><div class="slide__header"><h2 class="slider__header__title"><strong>Conclusion</strong></h2><p>Thanks for checking this out! The Web Animations API has had a great start, but has a lot more to offer in the future. I hope you enjoy using it as much as I have lately and that it continues to develop into a beast of a native feature!</p><p>My hope is that WAAPI starts being used more and more. SMIL garnered a great community of artists and many people love third-party animation libraries. WAAPI would be a great feature for those communities and tools to adopt.</p><p>Let me know if you have any questions or would like to help improve this page. All source code is on <a href="https://github.com/yepnamesjames/web-animations-intro" target="_blank">Github</a>!</p></div></section><script src="js/myAnimations.min.js"></script></body></html>
