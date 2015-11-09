@@ -82,7 +82,7 @@ animateLeonardo2.onfinish = function() {
 
 var leftSharkLeftFin = document.querySelector('#shark1-LeftFin').animate([
     {transform: 'scale(1) rotate(0deg)'},
-    {transform: 'scale(0.95) rotate(70deg) translate(-40%,-37%)'}
+    {transform: 'scale(0.95) rotate(70deg) translate(-50px,-0px)'}
 ], {
     duration: 1000,
     direction: 'alternate',
@@ -93,7 +93,7 @@ leftSharkLeftFin.currentTime = 500;
 
 var leftSharkRightFin = document.querySelector('#shark1-RightFin').animate([
     {transform: 'scale(1) rotate(0deg)'},
-    {transform: 'scale(0.95) rotate(-70deg) translate(30%,-50%)'}
+    {transform: 'scale(0.95) rotate(-70deg) translateX(-50px)'}
 ], {
     duration: 1000,
     direction: 'alternate',
@@ -102,7 +102,7 @@ var leftSharkRightFin = document.querySelector('#shark1-RightFin').animate([
 
 var rightSharkLeftFin = document.querySelector('#shark2-LeftFin').animate([
     {transform: 'scale(1) rotate(0deg)'},
-    {transform: 'scale(0.95) rotate(70deg) translate(-40%,-37%)'}
+    {transform: 'scale(0.95) rotate(70deg) translate(-50px,-0px)'}
 ], {
     duration: 1000,
     direction: 'alternate',
@@ -111,7 +111,7 @@ var rightSharkLeftFin = document.querySelector('#shark2-LeftFin').animate([
 
 var rightSharkRightFin = document.querySelector('#shark2-RightFin').animate([
     {transform: 'scale(1) rotate(0deg)'},
-    {transform: 'scale(0.95) rotate(-70deg) translate(30%,-50%)'}
+    {transform: 'scale(0.95) rotate(-70deg) translateX(-50px)'}
 ], {
     duration: 1000,
     direction: 'alternate',

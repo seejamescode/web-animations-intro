@@ -66,13 +66,6 @@ code {
   text-align: center;
 
   .slide--css__content__half {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    overflow: hidden;
-    padding: 1em;
-    text-align: center;
     width: calc(100% - 2em);
 
     .slide--css__content__half__shaq {
@@ -90,6 +83,13 @@ code {
     flex-direction: row;
 
     .slide--css__content__half {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow: hidden;
+      padding: 1em;
+      text-align: center;
       width: 50%;
     }
   }
@@ -132,6 +132,16 @@ code {
 
     .slide--timeline__content__shark {
       width: 30%;
+
+      #shark1-LeftFin,
+      #shark2-LeftFin {
+        transform-origin: 400px 450px;
+      }
+
+      #shark1-RightFin,
+      #shark2-RightFin {
+        transform-origin: 550px 400px;
+      }
     }
 
     .slide--timeline__content__katy {
