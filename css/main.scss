@@ -57,6 +57,24 @@ code {
   text-align: left;
 }
 
+.slide--title {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow-x: hidden;
+  text-align: center;
+  height: 100vh;
+
+  .slide--title__h1 {
+    color: #f00;
+  }
+
+  .slide--title__h2 {
+    opacity: 0;
+  }
+}
+
 .slide--css__content {
   align-items: center;
   display: flex;

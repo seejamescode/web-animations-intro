@@ -1,3 +1,27 @@
+var animateH2 = document.getElementById('h2-animation').animate([
+    { transform: 'scale(100)', opacity: 0 },
+    { transform: 'scale(1)', opacity: 1  }
+  ], {
+    delay: 2000,
+    duration: 1000,
+    iterations: 1
+  }
+);
+
+animateH2.onfinish = function() {
+  document.getElementById('h2-animation').style.opacity = 1;
+  var animateTitle = document.getElementById('title-animation').animate([
+      { color: '#ff0000' },
+      { color: '#00ff00' },
+      { color: '#0000ff' },
+      { color: '#ff0000' }
+    ], {
+      duration: 5000,
+      iterations: Infinity
+    }
+  );
+};
+
 var animateShaq = document.getElementById('shaq').animate([
     { transform: 'rotate(0)' },
   { transform: 'rotate(360deg)' }
