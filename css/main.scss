@@ -1,6 +1,8 @@
 $black: #000;
 $blue: #00a7cd;
 $white: #fff;
+$cool-white: #f9f9fb;
+$blue-90: #152935;
 
 // Font Sizing
 $scale: 1;
@@ -26,25 +28,30 @@ p {
   line-height: 1.5em;
 }
 
+h1, h2, p {
+  color: $blue-90;
+}
+
 iframe {
   margin: 2em 0 !important;
 }
 
 .body {
+  background-color: $cool-white;
   margin: 0;
   padding: 0;
 }
 
 .btn {
   background: $white;
-  border: solid $black 2px;
-  color: $black;
+  border: solid $blue-90 2px;
+  color: $blue-90;
   margin: .5em;
   padding: .5em 1em;
   text-decoration: none;
 
   &:hover {
-    background: $black;
+    background: $blue-90;
     color: $white;
     text-decoration: none;
   }
