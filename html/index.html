@@ -15,7 +15,40 @@
 		<section class="slide slide--title">
 			<h1 id="title-animation" class="slide--title__h1">The Web Animations API</h1>
 			<h2 id="h2-animation" class="slide--title__h2">FINALLY</h2>
-			<p>James Y. Rauhut</p>
+			<p>An quick intro by <a href='https://twitter.com/seejamescode' target='_blank'>James Y. Rauhut.</a>
+			<br />
+			Much content found from <a href='https://birtles.wordpress.com/2013/06/26/introducing-web-animations/' target='_blank'>Brian Birtles</a> and <a href='http://danielcwilson.com/blog/2015/07/animations-intro/' target='_blank'>Dan Wilson</a>.</p>
+		</section>
+		<section class="slide slide--support" style='overflow: hidden;'>
+			<div class="slide__header">
+				<h2 class="slider__header__title">
+					<strong>History</strong>
+				</h2>
+				<p>
+					During my final creative project for a certificate in college, I got really into SMIL animations for SVGs. I thought they were the bomb.com because it allowed me to program animations without third party tools.
+				</p>
+				<p>
+					However, I would always get mad at Microsoft for never properly supporting them:
+					<blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">Really wish <a href="https://twitter.com/hashtag/IE?src=hash">#IE</a> and <a href="https://twitter.com/MicrosoftEdge">@MicrosoftEdge</a> would support SMIL and CSS animations in <a href="https://twitter.com/hashtag/SVG?src=hash">#SVG</a>. The power of animation is great!</p>&mdash; James Y Rauhut (@seejamescode) <a href="https://twitter.com/seejamescode/status/642176644573036544">September 11, 2015</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+				</p>
+				<p>
+					Turns out there was good reasoning for the IE/Edge team to never develop for SVG animations: They knew that making a specific way for SVG animations was too small of a scope and that there needed to be a single model for all web animation.
+				</p>
+				<p>
+					So Adobe, Google, and Mozilla gave us a working spec called the Web Animations API! While Microsoft did not participate in the development of WAAPI, I did appreciate that they helped influence it's creation.
+					<blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">I&#39;m sorry <a href="https://twitter.com/MicrosoftEdge">@MicrosoftEdge</a> for being so frustrated that you did not love SMIL animations.</p>&mdash; James Y Rauhut (@seejamescode) <a href="https://twitter.com/seejamescode/status/663556014478757888">November 9, 2015</a></blockquote>
+				<p>
+					Now some of the stuff I am about to show may not blow your mind. You may say "I could always pull this off with CSS animations or a third-party tool."
+				</p>
+				<p>
+					But that is not the point. The point is that this is finally becoming something native for browsers in the web developers' most commonly used scripting language!
+					<blockquote class="twitter-tweet" data-conversation="none" lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/MicrosoftEdge">@MicrosoftEdge</a> Now if you could please escalate the Web Animations API to higher priority than the Karaoke Web Standard, that would be great</p>&mdash; James Y Rauhut (@seejamescode) <a href="https://twitter.com/seejamescode/status/663556765535997952">November 9, 2015</a></blockquote>
+				</p>
+				<p>
+					Now lets check out some things that the Web Animations API has to offer!
+				</p>
+			</div>
 		</section>
 		<section class="slide slide--css">
 			<div class="slide__header">
@@ -494,13 +527,29 @@ backgroundSlider.addEventListener('change', function() {
 				<h2 class="slider__header__title">
 					Support <strong>All the Browsers!</strong>
 				</h2>
-				<p>All major browsers are currently supported by polyfill. Chrome and Firefox already natively support while it is a planned medium priority for the Edge team.</p>
+				<p>All major browsers are currently supported by <a href='https://github.com/web-animations/web-animations-js' target="_blank">polyfill</a>. Chrome and Firefox already natively support while it is a planned medium priority for the Edge team.</p>
 			</div>
 			<div class="slide--support__content">
 				<img class="slide--support__content__img" src="images/chrome.png" alt="Chrome">
 				<img class="slide--support__content__img" src="images/firefox.png" alt="Firefox">
 				<img class="slide--support__content__img" src="images/edge.png" alt="Edge">
 				<img class="slide--support__content__img" src="images/safari.png" alt="Safari">
+			</div>
+		</section>
+		<section class='slide slide--footer'>
+			<div class="slide__header">
+				<h2 class="slider__header__title">
+					<strong>Conclusion</strong>
+				</h2>
+				<p>
+					Thanks for checking this out! The Web Animations API has had a great start, but has a lot more to offer in the future. I hope you enjoy using it as much as I have lately and that it continues to develop into a beast of a native feature!
+				</p>
+				<p>
+					My hope is that WAAPI starts being used more and more. SMIL garnered a great community of artists and many people love third-party animation libraries. WAAPI would be a great feature for those communities and tools to adopt.
+				</p>
+				<p>
+					Let me know if you have any questions or would like to help improve this page. All source code is on <a href="https://github.com/yepnamesjames/web-animations-intro" target="_blank">Github</a>!
+				</p>
 			</div>
 		</section>
 		<script src="js/myAnimations.js"></script>

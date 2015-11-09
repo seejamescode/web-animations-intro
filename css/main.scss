@@ -18,6 +18,18 @@ code {
   height: 15em;
 }
 
+a {
+  color: inherit;
+}
+
+p {
+  line-height: 1.5em;
+}
+
+iframe {
+  margin: 2em 0 !important;
+}
+
 .body {
   margin: 0;
   padding: 0;
@@ -191,6 +203,7 @@ code {
 
 .slide--support {
   .slide--support__content {
+    margin-bottom: 5em;
     padding-top: 5em;
     width: 100%;
 
@@ -198,6 +211,10 @@ code {
       width: 10%;
     }
   }
+}
+
+.slide--footer {
+  
 }
 
 @keyframes spin {

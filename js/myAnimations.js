@@ -2,7 +2,7 @@ var animateH2 = document.getElementById('h2-animation').animate([
     { transform: 'scale(100)', opacity: 0 },
     { transform: 'scale(1)', opacity: 1  }
   ], {
-    delay: 2000,
+    delay: 1000,
     duration: 1000,
     iterations: 1
   }
