@@ -51,11 +51,16 @@ iframe {
 }
 
 .slide {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   text-align: center;
 
   .slide__header {
     padding: 1.5em 2em;
     text-align: left;
+    max-width: 720px;
     width: calc(100% - 4em);
 
     .slider__header__title {
@@ -211,10 +216,6 @@ iframe {
       width: 10%;
     }
   }
-}
-
-.slide--footer {
-  
 }
 
 @keyframes spin {
